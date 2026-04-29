@@ -1,0 +1,39 @@
+{
+  "name": "vscode-mario",
+  "displayName": "VS Code Mario",
+  "description": "A Mario-style game in the VS Code.",
+  "version": "0.0.1",
+  "engines": { "vscode": "^1.85.0" },
+  "categories": ["Other"],
+  "activationEvents": [],
+  "main": "./out/extension.js",
+  "contributes": {
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "marioContainer",
+          "title": "Mario",
+          "icon": "media/icon.svg"
+        }
+      ]
+    },
+    "views": {
+      "marioContainer": [
+        {
+          "type": "webview",
+          "id": "marioView",
+          "name": "Take a Break"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "compile": "tsc -p .",
+    "watch": "tsc -w -p ."
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.85.0",
+    "@types/node": "^20",
+    "typescript": "^5"
+  }
+}

@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor">
+  <!-- Hat -->
+  <rect x="3" y="2" width="10" height="2"/>
+  <rect x="2" y="4" width="12" height="2"/>
+  <!-- Face -->
+  <rect x="2" y="6" width="12" height="4"/>
+  <!-- Eyes (cutout effect via background) -->
+  <rect x="4" y="7" width="2" height="2" fill="none" style="fill:var(--vscode-sideBar-background,#000)"/>
+  <rect x="10" y="7" width="2" height="2" fill="none" style="fill:var(--vscode-sideBar-background,#000)"/>
+  <!-- Body -->
+  <rect x="3" y="10" width="10" height="3"/>
+  <!-- Legs -->
+  <rect x="2" y="13" width="4" height="2"/>
+  <rect x="10" y="13" width="4" height="2"/>
+</svg>
