@@ -1,14 +1,14 @@
 // Web Audio API sound effects — all tones generated procedurally.
 
-let _ctx = null;
-function ctx() {
-  if (!_ctx) _ctx = new AudioContext();
-  if (_ctx.state === 'suspended') _ctx.resume();
-  return _ctx;
+let _ac = null;
+function getAC() {
+  if (!_ac) _ac = new AudioContext();
+  if (_ac.state === 'suspended') _ac.resume();
+  return _ac;
 }
 
 function tone(type, freq, endFreq, duration, volume, startDelay = 0) {
-  const ac   = ctx();
+  const ac   = getAC();
   const osc  = ac.createOscillator();
   const gain = ac.createGain();
   const t    = ac.currentTime + startDelay;
