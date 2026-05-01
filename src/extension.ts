@@ -48,7 +48,7 @@ class MarioViewProvider implements vscode.WebviewViewProvider {
 </head>
 <body>
   <canvas id="game"></canvas>
-  <div id="pause-overlay">PAUSED<br><small>Click here to resume</small></div>
+  <div id="pause-overlay"><span id="pause-overlay-text"></span></div>
   <script src="${levelUri}"></script>
   <script src="${gameUri}"></script>
   <script src="${mainUri}"></script>

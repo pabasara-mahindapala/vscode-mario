@@ -14,15 +14,28 @@ window.addEventListener('keydown', e => { keys.add(e.code); e.preventDefault(); 
 window.addEventListener('keyup',   e => keys.delete(e.code));
 
 // ─── Pause on focus loss ──────────────────────────────────────────────────────
-let paused = false;
-let last   = performance.now();
-let acc    = 0;
-const STEP = 1000 / 60;
+let paused     = true;
+let notStarted = true;
+let last       = performance.now();
+let acc        = 0;
+const STEP     = 1000 / 60;
 
-const pauseOverlay = document.getElementById('pause-overlay');
-window.addEventListener('blur',  () => { paused = true;  pauseOverlay.classList.add('visible'); });
+const pauseOverlay     = document.getElementById('pause-overlay');
+const pauseOverlayText = document.getElementById('pause-overlay-text');
+
+function showStartOverlay() {
+  pauseOverlayText.innerHTML = 'CLICK TO START';
+  pauseOverlay.classList.add('visible');
+}
+
+function showPauseOverlay() {
+  pauseOverlayText.innerHTML = 'PAUSED<br><small>Click here to resume</small>';
+  pauseOverlay.classList.add('visible');
+}
+
+window.addEventListener('blur',  () => { paused = true;  showPauseOverlay(); });
 window.addEventListener('focus', () => { paused = false; last = performance.now(); acc = 0; pauseOverlay.classList.remove('visible'); });
-pauseOverlay.addEventListener('click', () => window.focus());
+pauseOverlay.addEventListener('click', () => { notStarted = false; window.focus(); });
 
 // ─── Game instance ────────────────────────────────────────────────────────────
 let game;
@@ -294,5 +307,6 @@ function frame(now) {
 
 // ─── Boot ─────────────────────────────────────────────────────────────────────
 initGame();
+showStartOverlay();
 last = performance.now();
 requestAnimationFrame(frame);

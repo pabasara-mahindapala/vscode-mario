@@ -27,11 +27,12 @@ body {
   font-family: monospace;
   font-size: 20px;
   text-align: center;
-  padding-top: 40%;
+  align-items: center;
+  justify-content: center;
   cursor: pointer;
   letter-spacing: 2px;
 }
 
 #pause-overlay.visible {
-  display: block;
+  display: flex;
 }
