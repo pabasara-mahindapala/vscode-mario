@@ -39,8 +39,15 @@ pauseOverlay.addEventListener('click', () => { notStarted = false; window.focus(
 
 // ─── Game instance ────────────────────────────────────────────────────────────
 let game;
+let prevCoinsTaken = 0;
+let prevStomps     = 0;
+let prevState      = 'playing';
+
 function initGame() {
-  game = new window.Game(window.LEVEL, window.ENEMY_SPAWNS);
+  game           = new window.Game(window.LEVEL, window.ENEMY_SPAWNS);
+  prevCoinsTaken = 0;
+  prevStomps     = 0;
+  prevState      = 'playing';
 }
 
 // ─── Procedural drawing helpers ───────────────────────────────────────────────
@@ -298,6 +305,22 @@ function frame(now) {
       if (keys.has('KeyR') && game.state !== 'playing') { initGame(); acc = 0; break; }
       game.update(keys, STEP / 1000);
       acc -= STEP;
+
+      if (game.player.justJumped) sounds.jump();
+
+      const coinsTaken = game.coins.filter(c => c.taken).length;
+      if (coinsTaken > prevCoinsTaken) sounds.coin();
+      prevCoinsTaken = coinsTaken;
+
+      const stomps = game.goombas.filter(g => g.squished || g.dead).length;
+      if (stomps > prevStomps) sounds.stomp();
+      prevStomps = stomps;
+
+      if (game.state !== prevState) {
+        if (game.state === 'dead') sounds.die();
+        if (game.state === 'won')  sounds.win();
+      }
+      prevState = game.state;
     }
     render();
   }

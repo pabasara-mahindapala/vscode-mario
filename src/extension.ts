@@ -30,6 +30,7 @@ class MarioViewProvider implements vscode.WebviewViewProvider {
 
     const levelUri  = asUri('level.js');
     const gameUri   = asUri('game.js');
+    const soundsUri = asUri('sounds.js');
     const mainUri   = asUri('main.js');
     const styleUri  = asUri('style.css');
     const csp       = webviewView.webview.cspSource;
@@ -51,6 +52,7 @@ class MarioViewProvider implements vscode.WebviewViewProvider {
   <div id="pause-overlay"><span id="pause-overlay-text"></span></div>
   <script src="${levelUri}"></script>
   <script src="${gameUri}"></script>
+  <script src="${soundsUri}"></script>
   <script src="${mainUri}"></script>
 </body>
 </html>`;

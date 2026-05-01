@@ -98,9 +98,11 @@ class Player {
     }
 
     // ── Jump ──
+    this.justJumped = false;
     if ((keys.has('Space') || keys.has('ArrowUp')) && this.onGround) {
       this.vy = JUMP_VEL;
       this.onGround = false;
+      this.justJumped = true;
     }
 
     this.vy += GRAVITY * dt;
