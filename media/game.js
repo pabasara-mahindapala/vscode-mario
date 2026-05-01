@@ -155,16 +155,18 @@ class Goomba {
 
 // ─── Game state ───────────────────────────────────────────────────────────────
 class Game {
-  constructor(map, enemySpawns) {
-    this.map = map;
-    this.enemySpawns = enemySpawns;
-    this.cols = map[0].length;
-    this.rows = map.length;
+  constructor(levelConfig) {
+    this.levelConfig = levelConfig;
+    this.map         = levelConfig.map;
+    this.enemySpawns = levelConfig.enemySpawns;
+    this.cols        = this.map[0].length;
+    this.rows        = this.map.length;
     this.reset();
   }
 
   reset() {
-    this.player  = new Player(2 * TILE, 9 * TILE);
+    const [px, py] = this.levelConfig.playerSpawn;
+    this.player  = new Player(px * TILE, py * TILE);
     this.goombas = this.enemySpawns.map(([tx, ty]) => new Goomba(tx * TILE, ty * TILE));
     this.coins   = this._collectCoins();
     this.score   = 0;

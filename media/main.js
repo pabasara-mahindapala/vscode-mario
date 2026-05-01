@@ -39,15 +39,23 @@ pauseOverlay.addEventListener('click', () => { notStarted = false; window.focus(
 
 // ─── Game instance ────────────────────────────────────────────────────────────
 let game;
-let prevCoinsTaken = 0;
-let prevStomps     = 0;
-let prevState      = 'playing';
+let currentLevel      = 0;
+let scoreAtLevelStart = 0;
+let gameComplete      = false;
+let prevCoinsTaken    = 0;
+let prevStomps        = 0;
+let prevState         = 'playing';
 
-function initGame() {
-  game           = new window.Game(window.LEVEL, window.ENEMY_SPAWNS);
-  prevCoinsTaken = 0;
-  prevStomps     = 0;
-  prevState      = 'playing';
+function initGame(levelIndex = currentLevel, startingScore = scoreAtLevelStart) {
+  currentLevel      = levelIndex;
+  scoreAtLevelStart = startingScore;
+  gameComplete      = false;
+  game              = new window.Game(window.LEVELS[levelIndex]);
+  game.score        = startingScore;
+  prevCoinsTaken    = 0;
+  prevStomps        = 0;
+  prevState         = 'playing';
+  keys.clear();
 }
 
 // ─── Procedural drawing helpers ───────────────────────────────────────────────
@@ -262,9 +270,11 @@ function renderHUD() {
   const taken = game.coins.filter(c => c.taken).length;
   const total = game.coins.length;
   ctx.fillText(`COINS: ${taken}/${total}`, W / 2 - 20, 10);
+  ctx.textAlign = 'right';
+  ctx.fillText(`L${currentLevel + 1}/${window.LEVELS.length}`, W - 4, 10);
 }
 
-function renderOverlay(line1, line2) {
+function renderOverlay(line1, line2, line3 = 'R to restart level') {
   ctx.fillStyle = 'rgba(0,0,0,0.65)';
   ctx.fillRect(20, 70, W - 40, 80);
   ctx.fillStyle = '#fff';
@@ -274,7 +284,7 @@ function renderOverlay(line1, line2) {
   if (line2) { ctx.font = '9px monospace'; ctx.fillText(line2, W / 2, 120); }
   ctx.font = '8px monospace';
   ctx.fillStyle = '#aaa';
-  ctx.fillText('press R to restart', W / 2, 136);
+  ctx.fillText(line3, W / 2, 136);
   ctx.textAlign = 'left';
 }
 
@@ -291,7 +301,8 @@ function render() {
   renderPlayer();
   renderHUD();
 
-  if (game.state === 'won')  renderOverlay('YOU WIN! 🎉', `Score: ${game.score}`);
+  if (game.state === 'won' && !gameComplete) renderOverlay(`LEVEL ${currentLevel + 1} COMPLETE!`, 'Space for next level');
+  if (game.state === 'won' &&  gameComplete) renderOverlay('GAME COMPLETE!', `Final score: ${game.score}`);
   if (game.state === 'dead') renderOverlay('GAME OVER', `Score: ${game.score}`);
 }
 
@@ -302,7 +313,8 @@ function frame(now) {
     if (acc > 250) acc = 250; // prevent spiral-of-death after long pauses
 
     while (acc >= STEP) {
-      if (keys.has('KeyR') && game.state !== 'playing') { initGame(); acc = 0; break; }
+      if (keys.has('KeyR') && game.state !== 'playing') { initGame(currentLevel, scoreAtLevelStart); acc = 0; break; }
+      if (keys.has('Space') && game.state === 'won' && !gameComplete) { initGame(currentLevel + 1, game.score); acc = 0; break; }
       game.update(keys, STEP / 1000);
       acc -= STEP;
 
@@ -318,7 +330,10 @@ function frame(now) {
 
       if (game.state !== prevState) {
         if (game.state === 'dead') sounds.die();
-        if (game.state === 'won')  sounds.win();
+        if (game.state === 'won') {
+          sounds.win();
+          if (currentLevel >= window.LEVELS.length - 1) gameComplete = true;
+        }
       }
       prevState = game.state;
     }
