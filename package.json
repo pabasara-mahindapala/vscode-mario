@@ -1,8 +1,15 @@
 {
   "name": "vscode-mario",
   "displayName": "VS Code Mario",
-  "description": "A Mario-style game in the VS Code.",
+  "description": "A Mario-style game for VS Code.",
   "version": "0.0.1",
+  "publisher": "pabasaramahindapala",
+  "icon": "images/icon.png",
+  "galleryBanner": {
+    "color": "#1e1e1e",
+    "theme": "dark"
+  },
+  "keywords": ["game", "mario", "fun", "arcade"],
   "license": "MIT",
   "author": {
     "name": "Pabasara Mahindapala",

@@ -1,14 +1,19 @@
 # VS Code Mario
 
-A Mario-style platformer game that lives inside the VS Code sidebar. Take a quick break without leaving your editor.
+[![Version](https://img.shields.io/visual-studio-marketplace/v/pabasaramahindapala.vscode-mario?label=marketplace&color=blue)](https://marketplace.visualstudio.com/items?itemName=pabasaramahindapala.vscode-mario)
+[![Installs](https://img.shields.io/visual-studio-marketplace/i/pabasaramahindapala.vscode-mario)](https://marketplace.visualstudio.com/items?itemName=pabasaramahindapala.vscode-mario)
+[![License: MIT](https://img.shields.io/badge/license-MIT-green)](LICENSE)
+[![Build](https://img.shields.io/github/actions/workflow/status/pabasara-mahindapala/vscode-mario/build.yml?branch=main)](https://github.com/pabasara-mahindapala/vscode-mario/actions)
+
+A Mario-style game for VS Code.
 
 ## Features
 
-- Playable directly in the VS Code Explorer sidebar
-- Two levels of increasing difficulty
-- Procedural 8-bit sound effects (Web Audio API — no audio files)
-- All graphics drawn on canvas — no image assets
-- Score carries across levels; press **R** to restart a level, **Space** to advance after winning
+- Play in the VS Code sidebar
+- 8-bit sound effects
+- Stompable Goombas!
+- Collectible coins!
+- Press **R** to restart a level, **Space** to go to the next level
 
 ## Controls
 
@@ -16,12 +21,12 @@ A Mario-style platformer game that lives inside the VS Code sidebar. Take a quic
 |-----|--------|
 | Arrow Left / Right | Move |
 | Space / Arrow Up | Jump |
-| Space | Advance to next level (after winning) |
-| R | Restart current level (after game over or win) |
+| Space | Advance to next level (after winning the current one) |
+| R | Restart current level|
 
 ## Installation
 
-### From source
+### From source (for development)
 
 ```bash
 git clone https://github.com/pabasara-mahindapala/vscode-mario.git
@@ -42,9 +47,9 @@ code --install-extension vscode-mario-*.vsix
 
 ## How to open the game
 
-Open the **Explorer** sidebar (`Ctrl+Shift+E`) and look for the **VS Code Mario** panel at the bottom. Click the panel to start.
+In the **Explorer** sidebar (`Ctrl+Shift+E`) look for the **VS Code Mario** panel at the bottom.
 
-## Adding levels
+## Level design
 
 All level data lives in `media/level.js` as a `window.LEVELS` array. Each entry is a self-contained object:
 
@@ -60,25 +65,6 @@ All level data lives in `media/level.js` as a `window.LEVELS` array. Each entry 
   enemySpawns: [[tileX, tileY], ...],
 }
 ```
-
-Add a new object to the array and the multi-level system picks it up automatically.
-
-## Project structure
-
-```
-media/
-  level.js   — level data (LEVELS array)
-  game.js    — game logic (physics, collision, entities)
-  sounds.js  — procedural sound effects via Web Audio API
-  main.js    — canvas rendering, game loop, input handling
-  style.css  — overlay and canvas styles
-src/
-  extension.ts — VS Code extension entry point, webview setup
-```
-
-## Requirements
-
-- VS Code 1.85.0 or later
 
 ## License
 

@@ -274,9 +274,9 @@ function renderHUD() {
   ctx.fillText(`L${currentLevel + 1}/${window.LEVELS.length}`, W - 4, 10);
 }
 
-function renderOverlay(line1, line2, line3 = 'R to restart level') {
+function renderOverlay(line1, line2, line3 = 'R to restart level', line4 = null) {
   ctx.fillStyle = 'rgba(0,0,0,0.65)';
-  ctx.fillRect(20, 70, W - 40, 80);
+  ctx.fillRect(20, 70, W - 40, line4 ? 95 : 80);
   ctx.fillStyle = '#fff';
   ctx.font = 'bold 13px monospace';
   ctx.textAlign = 'center';
@@ -285,6 +285,7 @@ function renderOverlay(line1, line2, line3 = 'R to restart level') {
   ctx.font = '8px monospace';
   ctx.fillStyle = '#aaa';
   ctx.fillText(line3, W / 2, 136);
+  if (line4) ctx.fillText(line4, W / 2, 150);
   ctx.textAlign = 'left';
 }
 
@@ -302,7 +303,7 @@ function render() {
   renderHUD();
 
   if (game.state === 'won' && !gameComplete) renderOverlay(`LEVEL ${currentLevel + 1} COMPLETE!`, 'Space for next level');
-  if (game.state === 'won' &&  gameComplete) renderOverlay('GAME COMPLETE!', `Final score: ${game.score}`);
+  if (game.state === 'won' &&  gameComplete) renderOverlay('GAME COMPLETE!', `Final score: ${game.score}`, 'R: restart level', 'Enter: play again from L1');
   if (game.state === 'dead') renderOverlay('GAME OVER', `Score: ${game.score}`);
 }
 
@@ -315,6 +316,7 @@ function frame(now) {
     while (acc >= STEP) {
       if (keys.has('KeyR') && game.state !== 'playing') { initGame(currentLevel, scoreAtLevelStart); acc = 0; break; }
       if (keys.has('Space') && game.state === 'won' && !gameComplete) { initGame(currentLevel + 1, game.score); acc = 0; break; }
+      if (keys.has('Enter') && game.state === 'won' && gameComplete) { initGame(0, 0); acc = 0; break; }
       game.update(keys, STEP / 1000);
       acc -= STEP;
 
