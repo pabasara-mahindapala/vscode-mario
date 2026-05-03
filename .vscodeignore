@@ -1,5 +1,8 @@
 src/**
 tsconfig.json
 .gitignore
+.github/**
 node_modules/**
 out/**/*.map
+*.vsix
+package-lock.json
