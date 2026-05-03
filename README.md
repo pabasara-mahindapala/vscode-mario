@@ -5,15 +5,13 @@
 [![License: MIT](https://img.shields.io/badge/license-MIT-green)](LICENSE)
 [![Build](https://img.shields.io/github/actions/workflow/status/pabasara-mahindapala/vscode-mario/build.yml?branch=main)](https://github.com/pabasara-mahindapala/vscode-mario/actions)
 
-A Mario-style game for VS Code.
+A Mario-style game that lives right inside VS Code. Jump on Goombas, collect coins, and beat levels without leaving your editor.
 
-## Features
+![VS Code Mario](images/vscode-mario.gif)
 
-- Play in the VS Code sidebar
-- 8-bit sound effects
-- Stompable Goombas!
-- Collectible coins!
-- Press **R** to restart a level, **Space** to go to the next level
+## How to open the game
+
+Open the **Explorer** sidebar (`Ctrl+Shift+E`) and look for the **VS Code Mario** panel at the bottom.
 
 ## Controls
 
@@ -21,50 +19,16 @@ A Mario-style game for VS Code.
 |-----|--------|
 | Arrow Left / Right | Move |
 | Space / Arrow Up | Jump |
-| Space | Advance to next level (after winning the current one) |
-| R | Restart current level|
+| Space | Advance to next level (after winning) |
+| R | Restart current level |
 
-## Installation
+## Features
 
-### From source (for development)
-
-```bash
-git clone https://github.com/pabasara-mahindapala/vscode-mario.git
-cd vscode-mario
-npm install
-npm run compile
-```
-
-Then press **F5** in VS Code to launch an Extension Development Host with the extension loaded.
-
-### Package as VSIX
-
-```bash
-npm install -g @vscode/vsce
-vsce package
-code --install-extension vscode-mario-*.vsix
-```
-
-## How to open the game
-
-In the **Explorer** sidebar (`Ctrl+Shift+E`) look for the **VS Code Mario** panel at the bottom.
-
-## Level design
-
-All level data lives in `media/level.js` as a `window.LEVELS` array. Each entry is a self-contained object:
-
-```js
-{
-  name: 'Level N',
-  playerSpawn: [tileX, tileY],   // starting position in tile coordinates
-  map: [
-    // 14 rows × N columns of tile IDs
-    // 0 = air, 1 = ground, 2 = brick, 3 = coin,
-    // 4 = flag, 6 = cloud, 7 = pipe top, 8 = pipe body
-  ],
-  enemySpawns: [[tileX, tileY], ...],
-}
-```
+- Runs in the VS Code sidebar — no browser, no alt-tab
+- 8-bit sound effects
+- Stompable Goombas and collectible coins
+- Multiple levels with increasing difficulty
+- Score carries across levels
 
 ## License
 
