@@ -2,7 +2,7 @@
   "name": "vscode-mario",
   "displayName": "VS Code Mario",
   "description": "A Mario-style game for VS Code.",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "publisher": "pabasaramahindapala",
   "icon": "images/icon.png",
   "galleryBanner": {

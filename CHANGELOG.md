@@ -7,3 +7,8 @@
 - Move, jump, stomp Goombas, and collect coins
 - 8-bit sound effects
 - 2 levels - score carries across levels
+
+## [0.0.2] - 2026-05-04
+
+### Added
+- 3 New levels with new layouts and more Goombas
