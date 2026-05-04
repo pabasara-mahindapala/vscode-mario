@@ -1,7 +1,6 @@
 # VS Code Mario
 
-[![Version](https://img.shields.io/visual-studio-marketplace/v/pabasaramahindapala.vscode-mario?label=marketplace&color=blue)](https://marketplace.visualstudio.com/items?itemName=pabasaramahindapala.vscode-mario)
-[![Installs](https://img.shields.io/visual-studio-marketplace/i/pabasaramahindapala.vscode-mario)](https://marketplace.visualstudio.com/items?itemName=pabasaramahindapala.vscode-mario)
+[![Marketplace](https://img.shields.io/badge/VS%20Code-marketplace-blue)](https://marketplace.visualstudio.com/items?itemName=pabasaramahindapala.vscode-mario)
 [![License: MIT](https://img.shields.io/badge/license-MIT-green)](LICENSE)
 [![Build](https://img.shields.io/github/actions/workflow/status/pabasara-mahindapala/vscode-mario/build.yml?branch=main)](https://github.com/pabasara-mahindapala/vscode-mario/actions)
 
