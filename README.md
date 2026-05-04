@@ -29,6 +29,10 @@ Open the **Explorer** sidebar (`Ctrl+Shift+E`) and look for the **VS Code Mario*
 - Multiple levels with increasing difficulty
 - Score carries across levels
 
+## Author
+
+[Pabasara Mahindapala](https://pabasara-mahindapala.github.io/) - [GitHub](https://github.com/pabasara-mahindapala)
+
 ## License
 
 [MIT](LICENSE)
